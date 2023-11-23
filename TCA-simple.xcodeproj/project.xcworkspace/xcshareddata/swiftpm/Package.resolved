@@ -10,6 +10,15 @@
       }
     },
     {
+      "identity" : "helperforswiftui",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/PavelKoyushev/HelperForSwiftUI",
+      "state" : {
+        "branch" : "main",
+        "revision" : "d853f24ec36e319edf05a91f63786d11526df0cc"
+      }
+    },
+    {
       "identity" : "swift-case-paths",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/swift-case-paths",

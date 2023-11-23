@@ -5,16 +5,17 @@
 //  Created by Pavel Koyushev on 13.11.2023.
 //
 
-import Foundation
 import ComposableArchitecture
 
 struct CarFeature: Reducer {
     
     struct State: Equatable {
+        
         var car: Car = .mock()
     }
     
     enum Action: Equatable {
+        
         case favoriteToggle
     }
     

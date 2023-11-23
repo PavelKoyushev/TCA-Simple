@@ -11,8 +11,8 @@ import ComposableArchitecture
 struct MainView: View {
     
     var body: some View {
-        CarView(store: Store(initialState: CarFeature.State(car: .mock()),
-                             reducer: { CarFeature() }))
+        CarListView(store: Store(initialState: CarListFeature.State(cars: []),
+                                 reducer: { CarListFeature() }))
     }
 }
 

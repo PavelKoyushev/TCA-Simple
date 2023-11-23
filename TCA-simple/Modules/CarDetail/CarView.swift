@@ -53,7 +53,7 @@ private extension CarView {
     
     var control: some View {
         HStack(spacing: 20) {
-            Text("Dodge Daytona")
+            Text(viewStore.car.name)
                 .font(.title)
                 .bold()
             Spacer()
