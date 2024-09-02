@@ -8,36 +8,53 @@
 import SwiftUI
 import ComposableArchitecture
 
-struct CarListFeature: Reducer {
+@Reducer
+struct CarListFeature {
     
+    @ObservableState
     struct State: Equatable {
+        var path = StackState<Path.State>()
         
         var cars: [Car] = []
-        var destinations: [Destination] = []
-        
-        enum Destination: Hashable {
-            case carDetail(model: Car)
-        }
     }
     
-    enum Action: Equatable {
+    enum Action: BindableAction {
+        case binding(BindingAction<State>)
+        case path(StackAction<Path.State, Path.Action>)
         
         case onAppear
-        case pushCarDetailed(model: Car)
-        case navigationPathChanged([State.Destination])
+        case onCarCellTap(model: Car)
     }
     
-    func reduce(into state: inout State, action: Action) -> Effect<Action> {
-        switch action {
-        case .onAppear:
-            state.cars = [.mock(), .mock1()]
-            return .none
-        case let .pushCarDetailed(model):
-            state.destinations.append(.carDetail(model: model))
-            return .none
-        case let .navigationPathChanged(destinations):
-            state.destinations = destinations
-            return .none
+    var body: some ReducerOf<Self> {
+        BindingReducer()
+        
+        Reduce { state, action in
+            switch action {
+            case .onAppear:
+                state.cars = [.mock(), .mock1()]
+                return .none
+                
+            case let .onCarCellTap(model: model):
+                state.path.append(.pushCarDetailed(CarFeature.State(car: model)))
+                return .none
+                
+            case let .path(action):
+                return CarListPathReducer.reduce(state: &state, action: action)
+                
+                //MARK: - Other
+            case .binding:
+                return .none
+            }
         }
+        .forEach(\.path, action: \.path)
+    }
+}
+
+extension CarListFeature {
+    
+    @Reducer(state: .equatable)
+    enum Path {
+        case pushCarDetailed(CarFeature)
     }
 }

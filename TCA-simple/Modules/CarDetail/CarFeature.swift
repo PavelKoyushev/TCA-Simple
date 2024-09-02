@@ -7,23 +7,28 @@
 
 import ComposableArchitecture
 
-struct CarFeature: Reducer {
+@Reducer
+struct CarFeature {
     
+    @ObservableState
     struct State: Equatable {
         
         var car: Car = .mock()
     }
     
-    enum Action: Equatable {
+    enum Action {
         
         case favoriteToggle
     }
     
-    func reduce(into state: inout State, action: Action) -> Effect<Action> {
-        switch action {
-        case .favoriteToggle:
-            state.car.isFavourite.toggle()
-            return .none
+    var body: some ReducerOf<Self> {
+        
+        Reduce { state, action in
+            switch action {
+            case .favoriteToggle:
+                state.car.isFavourite.toggle()
+                return .none
+            }
         }
     }
 }

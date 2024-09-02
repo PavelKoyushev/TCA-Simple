@@ -6,23 +6,33 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct CarListCell: View {
     
     let model: Car
+    let action: (Car) -> Void
     
     var body: some View {
-        VStack(spacing: 0) {
-            image
-            text
-        }
+        content
+            .onTapGesture(perform: onCellTap)
     }
 }
 
 private extension CarListCell {
     
+    var content: some View {
+        VStack(spacing: 0) {
+            image
+            text
+        }
+        .background(Color.gray.opacity(0.3))
+        .padding(.horizontal)
+        .contentShape(Rectangle())
+    }
+    
     var image: some View {
-        AsyncImage(url: model.imageURL) { image in
+        WebImage(url: model.imageURL) { image in
             image
                 .resizable()
         } placeholder: {
@@ -34,24 +44,32 @@ private extension CarListCell {
                     .frame(width: UIScreen.main.bounds.width / 2.1)
             }
         }
+        .indicator(.activity)
+        .transition(.fade(duration: 0.5))
         .scaledToFill()
-        .frame(width: UIScreen.main.bounds.width - 32)
-        .frame(height: UIScreen.main.bounds.height / 3)
+        .frame(width: UIScreen.main.bounds.width - 32,
+               height: (UIScreen.main.bounds.width - 32) / 1.8)
         .clipped()
+        .clipShape(RoundedRectangle(cornerRadius: 20), style: .init(eoFill: true))
     }
     
     var text: some View {
         Text(model.name)
             .font(.title2)
-            .frame(maxWidth: .infinity,
-                   alignment: .leading)
+            .frame(maxWidth: .infinity, alignment: .leading)
             .frame(height: 40)
             .padding(.leading)
-            .background(Color.gray.opacity(0.3))
-            .padding(.horizontal)
+    }
+}
+
+private extension CarListCell {
+    
+    func onCellTap() {
+        action(model)
     }
 }
 
 #Preview {
-    CarListCell(model: .mock())
+    CarListCell(model: .mock(),
+                action: { _ in })
 }

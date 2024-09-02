@@ -10,48 +10,59 @@ import ComposableArchitecture
 
 struct CarListView: View {
     
-    let store: StoreOf<CarListFeature>
-    @ObservedObject var viewStore: ViewStoreOf<CarListFeature>
-    
-    init(store: StoreOf<CarListFeature>) {
-        self.store = store
-        self.viewStore = ViewStore(self.store, observe: { $0 })
-    }
+    @Perception.Bindable var store: StoreOf<CarListFeature>
     
     var body: some View {
-        content
-            .onAppear {
-                viewStore.send(.onAppear)
+        WithPerceptionTracking {
+            NavigationStack(path: $store.scope(state: \.path, action: \.path)) {
+                content
+                    .onAppear(perform: onAppear)
+                    .toolbar(.visible)
+                    .navigationTitle(Text("CarList"))
+                    .navigationBarTitleDisplayMode(.inline)
+            } destination: { store in
+                WithPerceptionTracking {
+                    destination(with: store)
+                }
             }
+        }
     }
 }
 
 private extension CarListView {
     
     var content: some View {
-        NavigationStack(path: viewStore.binding(
-            get: \.destinations,
-            send: CarListFeature.Action.navigationPathChanged
-        ), root: scrollView)}
-    
-    func scrollView() -> some View {
         ScrollView {
             VStack(spacing: 10) {
-                ForEach(viewStore.cars) { car in
-                    CarListCell(model: car)
-                        .onTapGesture {
-                            viewStore.send(.pushCarDetailed(model: car))
-                        }
+                ForEach(store.cars) { car in
+                    CarListCell(model: car,
+                                action: onCarListCellTap)
                 }
             }
         }
-        .navigationDestination(for: CarListFeature.State.Destination.self) { destination in
-            switch destination {
-            case let .carDetail(model):
-                CarView(store: Store(initialState: CarFeature.State(car: model),
-                                     reducer: { CarFeature() }))
-            }
+    }
+}
+
+private extension CarListView {
+    
+    @ViewBuilder
+    func destination(with store: Store<CarListFeature.Path.State, CarListFeature.Path.Action>) -> some View {
+        switch store.case {
+        case let .pushCarDetailed(store):
+            CarView(store: store)
         }
+    }
+}
+
+//MARK: - Actions
+private extension CarListView {
+    
+    func onAppear() {
+        store.send(.onAppear)
+    }
+    
+    func onCarListCellTap(model: Car) {
+        store.send(.onCarCellTap(model: model))
     }
 }
 
