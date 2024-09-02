@@ -50,7 +50,6 @@ private extension CarListCell {
         .frame(width: UIScreen.main.bounds.width - 32,
                height: (UIScreen.main.bounds.width - 32) / 1.8)
         .clipped()
-        .clipShape(RoundedRectangle(cornerRadius: 20), style: .init(eoFill: true))
     }
     
     var text: some View {
