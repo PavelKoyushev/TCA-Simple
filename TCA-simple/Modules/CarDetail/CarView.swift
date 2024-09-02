@@ -7,19 +7,16 @@
 
 import SwiftUI
 import ComposableArchitecture
+import SDWebImageSwiftUI
 
 struct CarView: View {
     
-    let store: StoreOf<CarFeature>
-    @ObservedObject var viewStore: ViewStoreOf<CarFeature>
-    
-    init(store: StoreOf<CarFeature>) {
-        self.store = store
-        self.viewStore = ViewStore(self.store, observe: { $0 })
-    }
+    @Perception.Bindable var store: StoreOf<CarFeature>
     
     var body: some View {
-        content
+        WithPerceptionTracking {
+            content
+        }
     }
 }
 
@@ -36,7 +33,7 @@ private extension CarView {
     }
     
     var image: some View {
-        AsyncImage(url: viewStore.car.imageURL) { image in
+        WebImage(url: store.car.imageURL) { image in
             image
                 .resizable()
         } placeholder: {
@@ -48,33 +45,41 @@ private extension CarView {
                     .frame(width: UIScreen.main.bounds.width / 2.1)
             }
         }
-        .frame(height: UIScreen.main.bounds.height / 3)
+        .indicator(.activity)
+        .transition(.fade(duration: 0.5))
+        .scaledToFit()
     }
     
     var control: some View {
         HStack(spacing: 20) {
-            Text(viewStore.car.name)
+            Text(store.car.name)
                 .font(.title)
                 .bold()
             Spacer()
             Image(systemName: "text.bubble")
                 .resizable()
                 .frame(width: 24, height: 20)
-            Image(systemName: viewStore.car.isFavourite ? "heart.fill" : "heart")
+            Image(systemName: store.car.isFavourite ? "heart.fill" : "heart")
                 .resizable()
                 .frame(width: 24, height: 20)
-                .foregroundStyle(viewStore.car.isFavourite ? .pink : .gray)
-                .onTapGesture {
-                    viewStore.send(.favoriteToggle)
-                }
+                .foregroundStyle(store.car.isFavourite ? .pink : .gray)
+                .onTapGesture(perform: onFavoriteTap)
         }
         .padding(.horizontal)
     }
     
     var info: some View {
-        Text(viewStore.car.info)
+        Text(store.car.info)
             .multilineTextAlignment(.leading)
             .padding(.horizontal)
+    }
+}
+
+//MARK: - Actions
+private extension CarView {
+    
+    func onFavoriteTap() {
+        store.send(.favoriteToggle)
     }
 }
 

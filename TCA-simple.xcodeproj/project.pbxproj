@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		E91343992B0FCE99007445D0 /* HelperSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = E91343982B0FCE99007445D0 /* HelperSwiftUI */; };
+		E92C2BC82C85F3D000CDF97F /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = E92C2BC72C85F3D000CDF97F /* ComposableArchitecture */; };
+		E92C2BCA2C85F4EC00CDF97F /* CarListPathReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92C2BC92C85F4EC00CDF97F /* CarListPathReducer.swift */; };
 		E94657F92B02811B00EEDF85 /* Car.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94657F82B02811B00EEDF85 /* Car.swift */; };
 		E97F754D2B0FB03B00FAD747 /* CarListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97F754C2B0FB03B00FAD747 /* CarListView.swift */; };
 		E97F754F2B0FB05100FAD747 /* CarListFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97F754E2B0FB05100FAD747 /* CarListFeature.swift */; };
@@ -17,11 +19,12 @@
 		E98C82822B021B6A00562EE9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E98C82812B021B6A00562EE9 /* Assets.xcassets */; };
 		E98C82852B021B6A00562EE9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E98C82842B021B6A00562EE9 /* Preview Assets.xcassets */; };
 		E98C828D2B021FF500562EE9 /* CarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98C828C2B021FF500562EE9 /* CarView.swift */; };
-		E98C82902B0228D300562EE9 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = E98C828F2B0228D300562EE9 /* ComposableArchitecture */; };
 		E98C82922B0229CF00562EE9 /* CarFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98C82912B0229CF00562EE9 /* CarFeature.swift */; };
+		E9F448FF2C862D30005AF6EB /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = E9F448FE2C862D30005AF6EB /* SDWebImageSwiftUI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E92C2BC92C85F4EC00CDF97F /* CarListPathReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarListPathReducer.swift; sourceTree = "<group>"; };
 		E94657F82B02811B00EEDF85 /* Car.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Car.swift; sourceTree = "<group>"; };
 		E97F754C2B0FB03B00FAD747 /* CarListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarListView.swift; sourceTree = "<group>"; };
 		E97F754E2B0FB05100FAD747 /* CarListFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarListFeature.swift; sourceTree = "<group>"; };
@@ -40,8 +43,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9F448FF2C862D30005AF6EB /* SDWebImageSwiftUI in Frameworks */,
+				E92C2BC82C85F3D000CDF97F /* ComposableArchitecture in Frameworks */,
 				E91343992B0FCE99007445D0 /* HelperSwiftUI in Frameworks */,
-				E98C82902B0228D300562EE9 /* ComposableArchitecture in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +82,7 @@
 			children = (
 				E97F754C2B0FB03B00FAD747 /* CarListView.swift */,
 				E97F754E2B0FB05100FAD747 /* CarListFeature.swift */,
+				E92C2BC92C85F4EC00CDF97F /* CarListPathReducer.swift */,
 			);
 			path = CarList;
 			sourceTree = "<group>";
@@ -126,9 +131,9 @@
 			isa = PBXGroup;
 			children = (
 				E97F75522B0FC31200FAD747 /* App */,
-				E98C828B2B021FAB00562EE9 /* Modules */,
 				E97F75512B0FC30300FAD747 /* Resources */,
 				E94657F72B02810F00EEDF85 /* Models */,
+				E98C828B2B021FAB00562EE9 /* Modules */,
 				E97F75502B0FC2F400FAD747 /* Components */,
 				E98C82832B021B6A00562EE9 /* Preview Content */,
 			);
@@ -170,8 +175,9 @@
 			);
 			name = "TCA-simple";
 			packageProductDependencies = (
-				E98C828F2B0228D300562EE9 /* ComposableArchitecture */,
 				E91343982B0FCE99007445D0 /* HelperSwiftUI */,
+				E92C2BC72C85F3D000CDF97F /* ComposableArchitecture */,
+				E9F448FE2C862D30005AF6EB /* SDWebImageSwiftUI */,
 			);
 			productName = "TCA-simple";
 			productReference = E98C827A2B021B6900562EE9 /* TCA-simple.app */;
@@ -202,8 +208,9 @@
 			);
 			mainGroup = E98C82712B021B6900562EE9;
 			packageReferences = (
-				E98C828E2B0228D300562EE9 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
 				E91343972B0FCE99007445D0 /* XCRemoteSwiftPackageReference "HelperForSwiftUI" */,
+				E92C2BC62C85F3D000CDF97F /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
+				E9F448FD2C862D30005AF6EB /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 			);
 			productRefGroup = E98C827B2B021B6900562EE9 /* Products */;
 			projectDirPath = "";
@@ -239,6 +246,7 @@
 				E98C827E2B021B6900562EE9 /* TCA_simpleApp.swift in Sources */,
 				E97F75542B0FC36700FAD747 /* CarListCell.swift in Sources */,
 				E97F754D2B0FB03B00FAD747 /* CarListView.swift in Sources */,
+				E92C2BCA2C85F4EC00CDF97F /* CarListPathReducer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -460,12 +468,20 @@
 				kind = branch;
 			};
 		};
-		E98C828E2B0228D300562EE9 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
+		E92C2BC62C85F3D000CDF97F /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture?ysclid=lowq2o0uq4871085463";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.3.0;
+				minimumVersion = 1.14.0;
+			};
+		};
+		E9F448FD2C862D30005AF6EB /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.1.2;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -476,10 +492,15 @@
 			package = E91343972B0FCE99007445D0 /* XCRemoteSwiftPackageReference "HelperForSwiftUI" */;
 			productName = HelperSwiftUI;
 		};
-		E98C828F2B0228D300562EE9 /* ComposableArchitecture */ = {
+		E92C2BC72C85F3D000CDF97F /* ComposableArchitecture */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = E98C828E2B0228D300562EE9 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
+			package = E92C2BC62C85F3D000CDF97F /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
 			productName = ComposableArchitecture;
+		};
+		E9F448FE2C862D30005AF6EB /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E9F448FD2C862D30005AF6EB /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
